@@ -123,6 +123,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="MarsStation.cpp" />
+    <ClCompile Include="Mission.cpp" />
+    <ClCompile Include="Rover.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Defs.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="MarsStation.h" />
+    <ClInclude Include="Mission.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="PriorityNode.h" />
+    <ClInclude Include="PriorityQueue.h" />
+    <ClInclude Include="Queue.h" />
+    <ClInclude Include="Rover.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
