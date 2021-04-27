@@ -1,12 +1,9 @@
 #pragma once
 #include "Event.h"
-#include "LinkedList.h"
-#include "PriorityQueue.h"
-#include "Queue.h"
+
 #include "Rover.h"
 #include "Mission.h"
-#include <fstream>
-#include <iostream>
+
 using namespace std;
 #include "Defs.h"
 class MarsStation
@@ -19,11 +16,11 @@ private:
 	PriorityQueue<Rover*> RoversInCheckUp;
 
 
-	PriorityQueue<Mission*> Emergency_Missions;
-	LinkedList<Mission*> Mountainous_Missions;
-	Queue<Mission*> Polar_Missions;
-	PriorityQueue<Mission*> MissionsInExecutions;
-	Queue<Mission*> CompletedMissions;
+	PriorityQueue<Missions*> Emergency_Missions;
+	LinkedList<Missions*> Mountainous_Missions;
+	Queue<Missions*> Polar_Missions;
+	PriorityQueue<Missions*> MissionsInExecutions;
+	Queue<Missions*> CompletedMissions;
 public:
 
 
@@ -39,6 +36,7 @@ public:
 	int P_CK, M_CK, E_CK;
 	int AutoP;
 	int no_events;
+
 
 
 };

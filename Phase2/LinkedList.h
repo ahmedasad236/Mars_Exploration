@@ -7,6 +7,29 @@ private:
 	Node<T>* Head;	//Pointer to the head of the list
 	//You can add tail pointer too (depending on your problem)
 	Node<T>* tail;
+	bool DeleteFirst(T& frntEntry)
+	{
+		if (isEmpty())
+			return false;
+		else if (Head->getNext() == nullptr)
+		{
+			frntEntry = Head->getItem();
+			delete Head;
+			Head = tail = nullptr;
+
+		}
+		else
+		{
+			frntEntry = Head->getItem();
+			Node<T>* temp = new Node<T>;
+			temp = Head;
+			Head = Head->getNext();
+			delete temp;
+
+		}
+
+
+	}
 public:
 	LinkedList()
 	{
@@ -60,29 +83,7 @@ public:
 			tail = p;
 		}
 	}
-	bool DeleteFirst(T& frntEntry)
-	{
-		if (isEmpty())
-			return false;
-		else if (Head->getNext() == nullptr)
-		{
-			frntEntry = Head->getItem();
-			delete Head;
-			Head = tail = nullptr;
-
-		}
-		else
-		{
-			frntEntry = Head->getItem();
-			Node<T>* temp = new Node<T>;
-			temp = Head;
-			Head = Head->getNext();
-			delete temp;
-
-		}
-
-
-	}
+	
 	bool peek(T& frntEntry)
 	{
 		if (isEmpty())

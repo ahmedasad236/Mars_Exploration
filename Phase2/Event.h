@@ -1,12 +1,14 @@
 #pragma once
 class Event
 {
-private:
-
-
-
+protected:
+	int ED;
+	int MissionID;
 public:
+	Event(int ED, int MID) :ED(ED), MissionID(MID)
+	{}
 
-	Event();
+	virtual void Execute() = 0;
+	virtual ~Event()=0;
 };
 

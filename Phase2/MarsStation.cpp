@@ -23,7 +23,7 @@ void MarsStation::GetInput()
 	}
 	for (int i = 0; i < no_mountainousR; i++) {
 		Rover* M_ROVER = new Rover();
-		//M_ROVER->SetID(arr[i + 1]);
-
+		M_ROVER->SetID(arr[i + 1]);
+		M_ROVER->GetSpeed
 	}
 }
