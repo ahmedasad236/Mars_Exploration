@@ -1,4 +1,5 @@
 #pragma once
+#include "Mission.h"
 class Event
 {
 protected:
