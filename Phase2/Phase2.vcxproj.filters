@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="MarsStation">
+      <UniqueIdentifier>{43eadb43-fed5-4e5e-aa33-fc660d29f7d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DS_Used">
+      <UniqueIdentifier>{9a7d7f66-9540-4cee-8bb4-acf666955e81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Defs">
+      <UniqueIdentifier>{21c2f1e5-48ff-4c03-bd52-92e24059d93f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{921d4e86-e603-4291-99a6-7de9d2914a39}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Rover.cpp">
+      <Filter>MarsStation</Filter>
+    </ClCompile>
+    <ClCompile Include="MarsStation.cpp">
+      <Filter>MarsStation</Filter>
+    </ClCompile>
+    <ClCompile Include="Mission.cpp">
+      <Filter>MarsStation</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="FEvent.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CEvent.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="PEvent.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Rover.h">
+      <Filter>MarsStation</Filter>
+    </ClInclude>
+    <ClInclude Include="MarsStation.h">
+      <Filter>MarsStation</Filter>
+    </ClInclude>
+    <ClInclude Include="Mission.h">
+      <Filter>MarsStation</Filter>
+    </ClInclude>
+    <ClInclude Include="Defs.h">
+      <Filter>Defs</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityNode.h">
+      <Filter>DS_Used</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityQueue.h">
+      <Filter>DS_Used</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>DS_Used</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>DS_Used</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>DS_Used</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>DS_Used</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="FEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="CEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="PEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
