@@ -4,6 +4,7 @@ template <typename T>
 class LinkedList
 {
 private:
+	friend int postionOfId(LinkedList<T>l, int i);
 	Node<T>* Head;	//Pointer to the head of the list
 	//You can add tail pointer too (depending on your problem)
 	Node<T>* tail;

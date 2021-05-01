@@ -1,5 +1,6 @@
 #pragma once
 #include "Defs.h"
+#include "LinkedList.h"
 class Missions
 {
 	M_TYPE Type;
@@ -29,4 +30,23 @@ public:
 	M_TYPE get_type();
 	int getLastDay(double, double);
 };
-
+template<class T>
+int postionOfId(LinkedList<T>l,int i)
+{
+	Node<T>temp = l.Head;
+	int count = 0;
+	while (temp != NULL)
+	{
+		count++;
+		if (temp->getItem().id == i)
+		{
+			break;
+		}
+		temp = temp->getNext();
+	}
+	if (temp == NULL)
+	{
+		return -1;
+	}
+	return count;
+}

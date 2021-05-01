@@ -28,7 +28,7 @@ void MarsStation::GetInput()
 	}
 }
 
-void MarsStation::ADDTOMLIST(Missions * M)
+/*void MarsStation::ADDTOMLIST(Missions * M)
 {
 	Mountainous_Missions.InsertEnd(M);
-}
+}*/
