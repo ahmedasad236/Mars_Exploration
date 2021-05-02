@@ -14,13 +14,14 @@ void FEvent::Execute(MarsStation *Ms)
 		switch (Type)
 		{
 		case(MOUNTAINOUS):
-			Ms->ADDTOMLIST(A);
+			Ms->AddToMountList(A);
 			break;
 		case(POLAR):
-			Ms->ADDTOPLIST(A);
+			Ms->AddToPolarList(A);
+
 			break;
 		case(EMERGENCY):
-			Ms->ADDTOELIST(A,Sig);
+			Ms->AddToEmergencyList(A,Sig);
 			break;
 		default:
 			break;

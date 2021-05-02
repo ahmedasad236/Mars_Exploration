@@ -28,16 +28,42 @@ void MarsStation::GetInput()
 	}
 }
 
-void MarsStation::ADDTOMLIST(Missions * M)
+bool MarsStation::DeleteFromMountList(int id)
 {
-	Mountainous_Missions.InsertEnd(M);
-}
-void MarsStation::ADDTOPLIST(Missions* M)
-{
-	Polar_Missions.enqueue(M);
-}
-void MarsStation::ADDTOELIST(Missions* M,float s)
-{
-	Emergency_Missions.enqueue(M,s);
+	bool test = false;
+	Queue<Missions*>tempM;
+
+	Missions* tempMis;
+	while (Mountainous_Missions.dequeue(tempMis) && !test)
+	{
+		if (id != tempMis->getID())
+			tempM.enqueue(tempMis);
+
+		else
+			test = true;
+	}
+
+
+	while (Mountainous_Missions.dequeue(tempMis))
+		tempM.enqueue(tempMis);
+
+	while (tempM.dequeue(tempMis))
+		Mountainous_Missions.enqueue(tempMis);
+
+	return test;
 }
 
+void MarsStation::AddToEmergencyList(Missions* mis,float priority)
+{
+	Emergency_Missions.enqueue(mis, priority);
+}
+
+void MarsStation::AddToPolarList(Missions* pM)
+{
+	Polar_Missions.enqueue(pM);
+}
+
+void MarsStation::AddToMountList(Missions* mM)
+{
+	Mountainous_Missions.enqueue(mM);
+}

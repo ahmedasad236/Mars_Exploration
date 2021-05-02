@@ -18,22 +18,17 @@ private:
 
 	PriorityQueue<Missions*> Emergency_Missions;
 	LinkedList<Missions*> Mountainous_Missions;
+	Queue<Missions*> Mountainous_Missions;
 	Queue<Missions*> Polar_Missions;
 	PriorityQueue<Missions*> MissionsInExecutions;
 	Queue<Missions*> CompletedMissions;
 public:
-
-
-
-
 	MarsStation();
 	void GetInput();
-
-	void ADDTOMLIST(Missions* );
-
-	void ADDTOPLIST(Missions* );
-
-	void ADDTOELIST(Missions* , float);
+	bool DeleteFromMountList(int id);
+	void AddToEmergencyList(Missions*,float);
+	void AddToPolarList(Missions*);
+	void AddToMountList(Missions*);
 
 	//needed for getting information from input file
 	int no_EmerR, no_polarR, no_mountainousR;
