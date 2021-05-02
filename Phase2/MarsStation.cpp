@@ -37,7 +37,7 @@ void MarsStation::GetInput()
 
 }
 
-bool MarsStation::DeleteFromMountList(int id)
+bool MarsStation::DeleteFromMountList(int id,Missions* m)
 {
 	bool test = false;
 	Queue<Missions*>tempM;
@@ -51,6 +51,7 @@ bool MarsStation::DeleteFromMountList(int id)
 		else
 		{
 			test = true;
+			m = tempMis;
 			break;
 		}
 	}
@@ -62,43 +63,10 @@ bool MarsStation::DeleteFromMountList(int id)
 	while (tempM.dequeue(tempMis))
 		Mountainous_Missions.enqueue(tempMis);
 	
+	if (!test)m = NULL;
 	return test;
 }
 
-Missions* MarsStation::DeleteFromMountList_WithReturn(int id)
-{
-	bool test = false;
-	Queue<Missions*>tempM;
-
-	Missions* tempMis;
-	Missions* tempdeleted = NULL;
-	while (Mountainous_Missions.dequeue(tempMis) && !test)
-	{
-		if (id != tempMis->getID())
-			tempM.enqueue(tempMis);
-
-		else
-		{
-			test = true;
-			tempdeleted = tempMis;
-			break;
-		}
-	}
-
-
-	while (Mountainous_Missions.dequeue(tempMis))
-		tempM.enqueue(tempMis);
-
-	while (tempM.dequeue(tempMis))
-		Mountainous_Missions.enqueue(tempMis);
-
-	if (test)
-	{
-		return tempdeleted;
-	}
-	else
-		return NULL;
-}
 
 void MarsStation::AddToEmergencyList(Missions* mis)
 {

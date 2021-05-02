@@ -27,8 +27,7 @@ public:
 
 	MarsStation();
 	void GetInput();
-	bool DeleteFromMountList(int id);
-	Missions* DeleteFromMountList_WithReturn(int id);
+	bool DeleteFromMountList(int id,Missions* m = NULL);
 	void AddToEmergencyList(Missions*);
 	void AddToPolarList(Missions*);
 	void AddToMountList(Missions*);
