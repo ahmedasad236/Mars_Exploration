@@ -5,6 +5,7 @@ class LinkedList
 {
 private:
 	Node<T>* Head;	//Pointer to the head of the list
+	Node<T>* Tail;
 	int itemCount;
 
 	Node<T>* getPointerTo(T item)
@@ -27,13 +28,11 @@ public:
 	{
 		itemCount = 0;
 		Head = nullptr;
-		tail = nullptr;
+		Tail = nullptr;
 	}
 
 	//List is being desturcted ==> delete all items in the list
-	~LinkedList()
-	{DeleteAll();}
-
+	
 	bool isEmpty()
 	{return Head == nullptr;}
 
@@ -42,10 +41,9 @@ public:
 		
 		if (position < 1 && position > itemCount) 
 			return nullptr;
-		
 
 		Node<T>* curPtr = Head;
-		for (int skip = 1; skip <= position; skip++)
+		for (int skip = 1; skip <position; skip++)
 			curPtr = curPtr->getNext();
 
 		return curPtr;
@@ -53,12 +51,12 @@ public:
 
 	T getEntry(int position) 
 	{
-		bool ableToGet = (position >= 1) && (position <= itemCount);
-
-		if (ableToGet) {
-			Node<T>* nodePtr = getNodeAt(position);
-			return nodePtr->getItem();
+		if ((position >= 1) && (position <= itemCount))
+		{
+			return nullptr;
 		}
+		Node<T>* nodePtr = getNodeAt(position);
+		return nodePtr->getItem();
 
 	}
 
@@ -72,9 +70,13 @@ public:
 		return itemCount;
 	}
 
-	bool Add(T& item, int pos = itemCount)
+	bool Add(T& item, int pos = -1000)
 	{
-		if(pos > itemCount || pos < 1)
+		if (pos == -1000)
+		{
+			pos = itemCount;
+		}
+		else if(pos > itemCount || pos < 1)
 			return 0;
 
 		Node<T>* newNode = new Node<T>(item);
@@ -90,7 +92,7 @@ public:
 
 		else
 		{
-			Node<T>* ptr = getNodeAt(pos - 1);
+			Node<T>* ptr = getNodeAt(pos -1);
 			newNode->setNext(ptr->getNext());
 			ptr->setNext(newNode);
 		}
@@ -116,7 +118,7 @@ public:
 		{
 			Node<T>* prev = getNodeAt(pos - 1);
 			curr = prev->getNext();
-			prev->setNext(curr->getNext();
+			prev->setNext(curr->getNext());
 		}
 	
 		curr->setNext(nullptr);
@@ -124,6 +126,10 @@ public:
 		curr = nullptr;
 		itemCount--;
 		return 1;
+	}
+	~LinkedList()
+	{
+		DeleteAll();
 	}
 
 };

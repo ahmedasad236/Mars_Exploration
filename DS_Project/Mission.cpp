@@ -32,7 +32,7 @@ void Missions::ToEmergency()
 }
 double Missions::getPriority()
 {
-	return 0.0;
+	return getFactorOfImportance();
 }
 void Missions::set_state(M_STATUS m)
 {

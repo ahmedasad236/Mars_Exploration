@@ -81,13 +81,14 @@ bool MarsStation::DeleteFromMountList(int id, Missions* m)
 {
 
 	int i = 1;
-
+	Missions* temp;
 	while (!Mountainous_Missions.isEmpty()) 
 	{	
-		if (Mountainous_Missions.getEntry(i)) 
+		temp = Mountainous_Missions.getEntry(i);
+		if (temp) 
 		{
-			if (Mountainous_Missions.getEntry(i)->getID() == id) {
-				m = Mountainous_Missions.getEntry(i);
+			if (temp->getID() == id) {
+				m = temp;
 				break;
 			}
 		}
@@ -144,8 +145,8 @@ void MarsStation::AssignToRover()
 
 		else if (!Mountainous_Rovers.isEmpty())
 		{
-			Missions* M;
-			Mountainous_Missions.remove(M);
+			Missions* M = NULL;
+			Mountainous_Missions.remove(1);
 			M->Assign();
 			M->set_state(IN_EXCUTION);
 			float pri = M->getFactorOfImportance();
@@ -190,8 +191,8 @@ void MarsStation::AssignToRover()
 	{
 		if (!Mountainous_Rovers.isEmpty())
 		{
-			Missions* M;
-			Mountainous_Missions.remove(M);
+			Missions* M = NULL;
+			Mountainous_Missions.remove(1);  /////1 is a dumy NUM
 			M->Assign();
 			M->set_state(IN_EXCUTION);
 			float pri = M->getFactorOfImportance();
