@@ -13,7 +13,7 @@ public:
 	PriorityQueue();
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry, float prio);
-	bool dequeue(T& frntEntry, float prio);
+	bool dequeue(T& frntEntry, float& prio);
 	bool peekFront(T& frntEntry, float prio)  const;
 	~PriorityQueue();
 };
@@ -122,7 +122,7 @@ Output: True if the operation is successful; otherwise false.
 */
 
 template <typename T>
-bool PriorityQueue<T>::dequeue(T& frntEntry, float prio)
+bool PriorityQueue<T>::dequeue(T& frntEntry, float& prio)
 {
 	if (isEmpty())
 		return false;

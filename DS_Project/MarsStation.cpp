@@ -125,6 +125,7 @@ void MarsStation::AddToMountList(Missions* mM)
 
 }
 
+
 void MarsStation::AssignToRover()
 {
 	while (!Emergency_Missions.isEmpty() && (!Emergency_Rovers.isEmpty() || !Mountainous_Rovers.isEmpty() || !Polar_Rovers.isEmpty()))
@@ -133,26 +134,27 @@ void MarsStation::AssignToRover()
 		{
 			Missions* M;
 			float pri = 0.0;
+			float sig;
 			Emergency_Missions.dequeue(M, pri);
-			//M->Assign();
 			M->set_state(IN_EXCUTION);
 			MissionsInExecutions.enqueue(M, pri);
 			Rover* x = NULL;
-			//Emergency_Rovers.dequeue(x);
+			Emergency_Rovers.dequeue(x, sig);
 			x->SetNumberOfOrderServed();
 			RoversInExecution.enqueue(x, pri);
 		}
 
 		else if (!Mountainous_Rovers.isEmpty())
 		{
-			Missions* M = NULL;
+			Missions* M = Mountainous_Missions.getEntry(1);
 			Mountainous_Missions.remove(1);
 			M->Assign();
 			M->set_state(IN_EXCUTION);
 			float pri = M->getFactorOfImportance();
 			MissionsInExecutions.enqueue(M, pri);
 			Rover* x = NULL;
-			//	Mountainous_Rovers.dequeue(x);
+			float f;
+			Mountainous_Rovers.dequeue(x, f);
 			x->SetNumberOfOrderServed();
 			RoversInExecution.enqueue(x, pri);
 		}
@@ -182,7 +184,8 @@ void MarsStation::AssignToRover()
 			float pri = M->getFactorOfImportance();
 			MissionsInExecutions.enqueue(M, pri);
 			Rover* x = NULL;
-			//Polar_Rovers.dequeue(x);
+			float f;
+			Polar_Rovers.dequeue(x, f);
 			x->SetNumberOfOrderServed();
 			RoversInExecution.enqueue(x, pri);
 		}
@@ -191,14 +194,15 @@ void MarsStation::AssignToRover()
 	{
 		if (!Mountainous_Rovers.isEmpty())
 		{
-			Missions* M = NULL;
-			Mountainous_Missions.remove(1);  /////1 is a dumy NUM
+			Missions* M = Mountainous_Missions.getEntry(1);
+			Mountainous_Missions.remove(1);
 			M->Assign();
 			M->set_state(IN_EXCUTION);
 			float pri = M->getFactorOfImportance();
 			MissionsInExecutions.enqueue(M, pri);
 			Rover* x = NULL;
-			//	Mountainous_Rovers.dequeue(x);
+			float f;
+			Mountainous_Rovers.dequeue(x, f);
 			x->SetNumberOfOrderServed();
 			RoversInExecution.enqueue(x, pri);
 		}
@@ -206,17 +210,17 @@ void MarsStation::AssignToRover()
 		{
 			Missions* M;
 			float pri = 0.0;
+			float sig;
 			Emergency_Missions.dequeue(M, pri);
-			M->Assign();
 			M->set_state(IN_EXCUTION);
 			MissionsInExecutions.enqueue(M, pri);
 			Rover* x = NULL;
-			//Emergency_Rovers.dequeue(x);
+			Emergency_Rovers.dequeue(x, sig);
 			x->SetNumberOfOrderServed();
 			RoversInExecution.enqueue(x, pri);
 		}
 	}
-
+	return;
 }
 void MarsStation::Simulation()
 {
