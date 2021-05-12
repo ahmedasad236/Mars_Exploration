@@ -225,9 +225,9 @@ void MarsStation::AssignToRover()
 void MarsStation::ExecuteEvent()
 {
 	Event* event = NULL;
-	EventList.peekFront(event);
+	bool test =  EventList.peekFront(event);
 
-	while (event && CurrentStep == event->getEventDay())
+	while (test && CurrentStep == event->getEventDay())
 	{
 
 		Event* E = dynamic_cast<FEvent*>(event);
@@ -249,7 +249,7 @@ void MarsStation::ExecuteEvent()
 		}
 
 		EventList.dequeue(event);
-		EventList.peekFront(event);
+		test = EventList.peekFront(event);
 	}
 }void MarsStation::Simulation()
 {
