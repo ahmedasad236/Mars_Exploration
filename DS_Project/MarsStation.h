@@ -38,6 +38,7 @@ public:
 	void AddToMountList(Missions*);
 	void Simulation();
 	void AssignToRover();
+	void ExecuteEvent();
 
 	//needed for getting information from input file
 	int no_EmerR, no_polarR, no_mountainousR;

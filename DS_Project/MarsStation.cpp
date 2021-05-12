@@ -222,7 +222,36 @@ void MarsStation::AssignToRover()
 	}
 	return;
 }
-void MarsStation::Simulation()
+void MarsStation::ExecuteEvent()
+{
+	Event* event = NULL;
+	EventList.peekFront(event);
+
+	while (event && CurrentStep == event->getEventDay())
+	{
+
+		Event* E = dynamic_cast<FEvent*>(event);
+
+		if (E)
+			E->Execute(this);
+
+		else
+		{
+			E = dynamic_cast<PEvent*>(event);
+			if (E)
+				E->Execute(this);
+
+			else
+			{
+				E = dynamic_cast<CEvent*>(event);
+				E->Execute(this);
+			}
+		}
+
+		EventList.dequeue(event);
+		EventList.peekFront(event);
+	}
+}void MarsStation::Simulation()
 {
 	//cout << "Enter Input File you want to read" << endl;
 	//string s;
