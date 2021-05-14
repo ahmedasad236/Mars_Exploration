@@ -251,7 +251,47 @@ void MarsStation::ExecuteEvent()
 		EventList.dequeue(event);
 		test = EventList.peekFront(event);
 	}
-}void MarsStation::Simulation()
+}
+
+void MarsStation::endCheckUp()
+{
+	Rover* myRover;
+	float pri = 0;
+	while (RoversInCheckUp.peekFront(myRover, pri))
+	{
+		if (myRover->getDurationDay_ending() == CurrentStep)
+		{
+			RoversInCheckUp.dequeue(myRover, pri);
+			pri = myRover->GetSpeed();
+			if (myRover->GetType() == MOUNTAINOUS)
+			{
+				Mountainous_Rovers.enqueue(myRover, pri);
+			}
+			else if (myRover->GetType() == EMERGENCY)
+			{
+				Emergency_Rovers.enqueue(myRover, pri);
+			}
+			else if (myRover->GetType() == MOUNTAINOUS)
+			{
+				Polar_Rovers.enqueue(myRover, pri);
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+bool MarsStation::startCheckUp(Rover *myRover)
+{
+	if (myRover->GetNumberOfOrderServed() == myRover->GetMaxMissionBeforeCheckup())
+	{
+		RoversInCheckUp.enqueue(myRover, -myRover->getDurationDay_ending());  // minus here because we wanting the smaller ending day (day come first)
+		return true;														  // to be at the top of the queue (1 feb is earlier than 4 feb but smaller
+	}
+	else return false;
+}
+void MarsStation::Simulation()
 {
 	//cout << "Enter Input File you want to read" << endl;
 	//string s;

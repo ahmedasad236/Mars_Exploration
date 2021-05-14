@@ -39,6 +39,8 @@ public:
 	void Simulation();
 	void AssignToRover();
 	void ExecuteEvent();
+	void endCheckUp();
+	bool startCheckUp(Rover* myRover);
 
 	//needed for getting information from input file
 	int no_EmerR, no_polarR, no_mountainousR;

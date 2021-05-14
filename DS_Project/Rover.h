@@ -5,6 +5,8 @@ class Rover
 	int ID;
 	int Speed;
 	int CheckupDuration;
+	int DurationDay_starting;
+	int DurationDay_ending;
 	int maxMissionBeforeCheckup;
 	M_TYPE Type;
 	int NumberOfOrderServed;
@@ -13,6 +15,9 @@ public:
 	Rover(int id, int sp, M_TYPE t, int checkDuration, int missBefCheck);
 	void SetSpeed(int);
 	int GetSpeed();
+	void setDurationDay_starting(int day);
+	int getDurationDay_starting();
+	int getDurationDay_ending();
 	void SetID(int);
 	int GetID();
 	void SetCheckupDuration(int);
@@ -21,5 +26,6 @@ public:
 	M_TYPE GetType();
 	void SetNumberOfOrderServed();
 	int GetNumberOfOrderServed();
+	int GetMaxMissionBeforeCheckup();
 	~Rover();
 };
