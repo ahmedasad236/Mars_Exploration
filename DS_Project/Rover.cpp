@@ -29,6 +29,18 @@ int Rover::GetSpeed()
 {
 	return Speed;
 }
+void Rover::setDurationDay_starting(int day)
+{
+	DurationDay_starting = day;
+}
+int Rover::getDurationDay_starting()
+{
+	return DurationDay_starting;
+}
+int Rover::getDurationDay_ending()
+{
+	return DurationDay_starting + CheckupDuration;
+}
 void Rover::SetCheckupDuration(int i)
 {
 	CheckupDuration = i;
@@ -45,14 +57,40 @@ M_TYPE Rover::GetType()
 {
 	return Type;
 }
-void Rover::SetNumberOfOrderServed()
+
+void Rover::SetNumberOfOrderServed(int i)
 {
-	NumberOfOrderServed++;
+	if (i = -1)
+	{
+		NumberOfOrderServed++;
+	}
+
+	else
+	{
+		NumberOfOrderServed = i;
+	}
 }
 int Rover::GetNumberOfOrderServed()
 {
 	return NumberOfOrderServed;
 }
+int Rover::GetMaxMissionBeforeCheckup()
+{
+	return maxMissionBeforeCheckup;
+}
+
+void Rover::setMission(Missions* m)
+{
+	myMission = m;
+}
+
+Missions* Rover::getMission() const
+{
+	return myMission;
+}
+
+
 Rover::~Rover()
 {
+
 }

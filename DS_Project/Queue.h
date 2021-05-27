@@ -110,6 +110,7 @@ bool Queue<T>::dequeue(T& frntEntry)
 		backPtr = nullptr;
 
 	// Free memory reserved by the dequeued node
+	
 	delete nodeToDeletePtr;
 
 

@@ -51,7 +51,7 @@ public:
 
 	T getEntry(int position) 
 	{
-		if ((position >= 1) && (position <= itemCount))
+		if ((position< 1) && (position > itemCount))
 		{
 			return nullptr;
 		}
@@ -70,35 +70,54 @@ public:
 		return itemCount;
 	}
 
-	bool Add(T& item, int pos = -1000)
+	bool Add(const T& newEntry,int newPosition=1 )
 	{
-		if (pos == -1000)
-		{
-			pos = itemCount;
-		}
-		else if(pos > itemCount || pos < 1)
-			return 0;
+		bool ableToInsert = (newPosition >= 1) && (newPosition <= itemCount + 1);
+		if (ableToInsert) {
+			Node<T>* newNodePtr = new Node<T>(newEntry);
+			if (newPosition == 1) {
 
-		Node<T>* newNode = new Node<T>(item);
-		if (!newNode)
-			return 0;
-
-		int i = 1;
-		if (pos == i)
-		{
-			newNode->setNext(Head);
-			Head = newNode;
+				newNodePtr->setNext(Head);
+				Head = newNodePtr;
+			}
+			else {
+				Node<T>* prevPtr = getNodeAt(newPosition - 1);
+				newNodePtr->setNext(prevPtr->getNext());
+				prevPtr->setNext(newNodePtr);
+			}
+			itemCount++;
 		}
 
-		else
-		{
-			Node<T>* ptr = getNodeAt(pos -1);
-			newNode->setNext(ptr->getNext());
-			ptr->setNext(newNode);
-		}
-		
-		itemCount++;
-		return 1;
+
+		return ableToInsert;
+
+		//if (pos == -1000)
+		//{
+		//	pos = itemCount;
+		//}
+		//else if(pos > itemCount || pos < 1)
+		//	return 0;
+
+		//Node<T>* newNode = new Node<T>(item);
+		//if (!newNode)
+		//	return 0;
+
+		//int i = 1;
+		//if (pos == i)
+		//{
+		//	newNode->setNext(Head);
+		//	Head = newNode;
+		//}
+
+		//else
+		//{
+		//	Node<T>* ptr = getNodeAt(pos -1);
+		//	newNode->setNext(ptr->getNext());
+		//	ptr->setNext(newNode);
+		//}
+		//
+		//itemCount++;
+		//return 1;
 	}
 
 	bool remove(int pos)
