@@ -147,6 +147,7 @@
     <ClCompile Include="Mission.cpp" />
     <ClCompile Include="PEvent.cpp" />
     <ClCompile Include="Rover.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEvent.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Rover.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,7 +2,6 @@
 
 
 FEvent::FEvent(M_TYPE t, int ED, int ID, int location, int days, float sig) :Event(ED, ID)
-
 {
 	TLoc = location;
 	ReqDays = days;
@@ -12,7 +11,9 @@ FEvent::FEvent(M_TYPE t, int ED, int ID, int location, int days, float sig) :Eve
 
 void FEvent::Execute(MarsStation* Ms)
 {
-	Missions* A = new Missions(Type, MissionID, TLoc, ReqDays);
+	Missions* A = new Missions(Type, MissionID, TLoc, ReqDays ,ED);
+	A->setSignificance(Sig);
+
 	switch (Type)
 	{
 	case(MOUNTAINOUS):
@@ -23,7 +24,7 @@ void FEvent::Execute(MarsStation* Ms)
 
 		break;
 	case(EMERGENCY):
-		Ms->AddToEmergencyList(A, Sig);
+		Ms->AddToEmergencyList(A, A->getFactorOfImportance());
 		break;
 	default:
 		break;

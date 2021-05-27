@@ -57,9 +57,18 @@ M_TYPE Rover::GetType()
 {
 	return Type;
 }
-void Rover::SetNumberOfOrderServed()
+
+void Rover::SetNumberOfOrderServed(int i)
 {
-	NumberOfOrderServed++;
+	if (i = -1)
+	{
+		NumberOfOrderServed++;
+	}
+
+	else
+	{
+		NumberOfOrderServed = i;
+	}
 }
 int Rover::GetNumberOfOrderServed()
 {
@@ -69,6 +78,19 @@ int Rover::GetMaxMissionBeforeCheckup()
 {
 	return maxMissionBeforeCheckup;
 }
+
+void Rover::setMission(Missions* m)
+{
+	myMission = m;
+}
+
+Missions* Rover::getMission() const
+{
+	return myMission;
+}
+
+
 Rover::~Rover()
 {
+
 }

@@ -69,27 +69,29 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, float prio)
 		frontPtr = newNodePtr; // The queue is empty
 		backPtr = newNodePtr;
 	}
+
 	else
 	{
 		// The queue was not empty
-		if (newNodePtr->GetPriority() < frontPtr->GetPriority())
+		if (newNodePtr->GetPriority() > frontPtr->GetPriority())
 		{
 			newNodePtr->setNext(frontPtr);
 			frontPtr = newNodePtr;
-
 		}
+
 		else
 		{
 			PriorityNode<T>* prev = frontPtr;
 			PriorityNode<T>* curr = prev->getNext();
 			while (curr)
 			{
-				if (newNodePtr->GetPriority() < curr->GetPriority())
+				if (newNodePtr->GetPriority() > curr->GetPriority())
 				{
 					prev->setNext(newNodePtr);
 					newNodePtr->setNext(curr);
 					break;
 				}
+
 				else
 				{
 					prev = curr;
@@ -136,8 +138,8 @@ bool PriorityQueue<T>::dequeue(T& frntEntry, float& prio)
 		backPtr = nullptr;
 
 	// Free memory reserved by the dequeued node
-	delete nodeToDeletePtr;
-
+	if(!nodeToDeletePtr)
+		delete nodeToDeletePtr;
 
 	return true;
 

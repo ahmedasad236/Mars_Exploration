@@ -13,72 +13,93 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="DS_Used">
+      <UniqueIdentifier>{ccfd347f-3d67-40f7-8d6f-1127772cb419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MarsStation">
+      <UniqueIdentifier>{d540cc3c-6829-4f14-bd38-5c42347b4a23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{c6ab4c36-12a5-4a5f-a81a-591c22f28c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Defs">
+      <UniqueIdentifier>{a3e9c5e0-fe4d-4451-a7b4-20dfe556897a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI Class">
+      <UniqueIdentifier>{f97894e3-8d11-4947-ab64-bc880f6cc972}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MarsStation.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>MarsStation</Filter>
     </ClCompile>
     <ClCompile Include="Mission.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>MarsStation</Filter>
     </ClCompile>
     <ClCompile Include="Rover.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>MarsStation</Filter>
+    </ClCompile>
+    <ClCompile Include="FEvent.cpp">
+      <Filter>Event</Filter>
     </ClCompile>
     <ClCompile Include="Event.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CEvent.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="PEvent.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>UI Class</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MarsStation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mission.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Rover.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PriorityQueue.h">
+      <Filter>DS_Used</Filter>
     </ClInclude>
     <ClInclude Include="PriorityNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PriorityQueue.h">
-      <Filter>Header Files</Filter>
+      <Filter>DS_Used</Filter>
     </ClInclude>
     <ClInclude Include="Queue.h">
-      <Filter>Header Files</Filter>
+      <Filter>DS_Used</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>DS_Used</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>DS_Used</Filter>
+    </ClInclude>
+    <ClInclude Include="MarsStation.h">
+      <Filter>MarsStation</Filter>
+    </ClInclude>
+    <ClInclude Include="Mission.h">
+      <Filter>MarsStation</Filter>
+    </ClInclude>
+    <ClInclude Include="Rover.h">
+      <Filter>MarsStation</Filter>
+    </ClInclude>
+    <ClInclude Include="CEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="PEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="FEvent.h">
+      <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="Defs.h">
-      <Filter>Header Files</Filter>
+      <Filter>Defs</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>UI Class</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
