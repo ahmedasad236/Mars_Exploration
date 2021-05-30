@@ -6,6 +6,16 @@ using namespace std;
 
 class UI
 {
+	// Utility Functions to color the Output
+	string Color(int color = 7, string Message = "") {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+		return Message;
+	}
+
+	int Color(int color, int num) {
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+		return num;
+	}
 
 public:
 	UI();
