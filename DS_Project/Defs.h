@@ -7,6 +7,8 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <string>
+#include <Windows.h>
 enum M_TYPE {
 	MOUNTAINOUS,
 	POLAR,
