@@ -31,6 +31,16 @@ void FEvent::Execute(MarsStation* Ms)
 	}
 }
 
+M_TYPE FEvent::getMissionType() const
+{
+	return Type;
+}
+
+void FEvent::setMissionType(M_TYPE t)
+{
+	Type = t;
+}
+
 FEvent::~FEvent()
 {
 }

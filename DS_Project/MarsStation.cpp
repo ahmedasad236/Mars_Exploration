@@ -172,15 +172,10 @@ void MarsStation::GetInput()
 			// Create a polar Event if there are polar rovers
 			else if (typeOFmission == 'P' ) {
 
-				if (!no_polarR)
-					userInterface.PrintFailer(POLAR);
-
-				else
-				{
 					E = new FEvent(POLAR, ED, M_ID, TLOC, MDUR, SIG);
 					formulated++;
 					EventList.enqueue(E);
-				}
+					
 			}
 
 
@@ -422,23 +417,27 @@ void MarsStation::ExecuteEvent()
 	while (test && CurrentStep == event->getEventDay())
 	{
 
-		Event* E = dynamic_cast<FEvent*>(event);
+		FEvent* E = dynamic_cast<FEvent*>(event);
 
 		if (E)
-			E->Execute(this);
+		{
+			if (E->getMissionType() == POLAR && !no_polarR)
+				--formulated, userInterface.PrintFailer(POLAR);
+
+			else
+				E->Execute(this);
+		}
 
 		else
 		{
-			E = dynamic_cast<PEvent*>(event);
-
+			PEvent* E = dynamic_cast<PEvent*>(event);
+			
 			if (E)
-			{
 				E->Execute(this);
-			}
+			
 			else
 			{
-				
-				E = dynamic_cast<CEvent*>(event);
+				CEvent* E = dynamic_cast<CEvent*>(event);
 				E->Execute(this);
 			}
 		}
@@ -597,9 +596,9 @@ void MarsStation::dayDetails()
 {
 	ExecuteEvent();
 	AutoPromote();
+	endCheckUp();
 	AssignToRover();
 	checkCompleted();
-	endCheckUp();
 	if(UImode != 2)
 		printDay();
 	CurrentStep++;

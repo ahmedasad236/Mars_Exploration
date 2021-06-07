@@ -29,7 +29,7 @@ int UI::ChooseMode()
 void UI::SlientMode(int i)
 {
 	if (i == 0)
-		cout << Color(6, "\n\n********************  Silent Mode Simulation Starts...  ***************************\n");
+		cout << Color(6, "\n\nSilent Mode Simulation loading...  \n");
 	
 
 	else
@@ -53,15 +53,15 @@ bool UI::interActiveMode()
 void UI::PrintFailer(M_TYPE type)
 {
 	if (type == POLAR)
-		cout << Color(6, "There is Polar Mission Cancelled as there are no polar rovers :(\n");
+		cout << Color(4, "There is Polar Mission Cancelled as there are no polar rovers :(\n");
 
 	else 
-		cout << Color(6, "Unfortunately, there is no Rover to Execute Missions :(\n");
+		cout << Color(4, "Unfortunately, there is no Rover to Execute Missions :(\n");
 }
 
 void UI::EnterFileName()
 {
-	cout << Color(4, "******************************************* Welcome To CMP Mars Station :) *******************************************\n\n");
+	cout << Color(12, "******************************************* Welcome To CMP Mars Station :) *******************************************\n\n");
 	cout << Color(2, "Enter the input file number: ");
 
 	
