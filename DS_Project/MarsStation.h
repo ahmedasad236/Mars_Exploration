@@ -52,10 +52,10 @@ public:
 	void AddToMountList(Missions*);//Add To Mountainous List
 	void Simulation();//Simulation Of The Program
 	void AssignToRover();//Assigning Rover To Mission
-	void ExecuteEvent();//Execution Even
-	void endCheckUp(); 
-	bool startCheckUp(Rover* myRover);
-	void checkCompleted();
+	void ExecuteEvent();//Execution Event
+	void endCheckUp(); // Extract the rovers from the checkup list
+	bool startCheckUp(Rover* myRover); // start the checkup of a rover 
+	void checkCompleted(); // check if the mission is completed or not
 	void dayDetails();
 	void AddToPolarRover(Rover* P);
 	void AddToMountRover(Rover* M);
@@ -71,6 +71,8 @@ public:
 
 	//needed for getting information from input File
 	int getCountAutoPromotion();
+
+	// Create Output File
 	void outputFile();
 	~MarsStation();
 };

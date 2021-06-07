@@ -8,6 +8,9 @@ Missions::Missions()
 Missions::Missions(M_TYPE type, int Id, double Target, int DTF , int fd)
 {
 	ID = Id;
+	Significance = -1;
+	SpeedAssignedRover = -1;
+	formulationDay = -1;
 	TargetLocation = Target;
 	MissionDuration = DTF;
 	Type = type;
@@ -50,7 +53,7 @@ void Missions::set_type(M_TYPE m)
 {
 	Type = m;
 }
-void Missions::setMissionDuration(double& missionDuration)
+void Missions::setMissionDuration(double missionDuration)
 {
 	MissionDuration = missionDuration;
 }

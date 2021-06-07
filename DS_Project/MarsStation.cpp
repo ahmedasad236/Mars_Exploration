@@ -280,15 +280,18 @@ void MarsStation::AddToMountList(Missions* mM)
 }
 
 
-
+// Assign a mission to a rover
 void MarsStation::AssignToRover()
 {
-	Missions* M;
-	Rover* x;
-	float sig;
+	Missions* M; // temporary misiion
+	Rover* x; // temperoray rover
+	float sig; 
 	float pri;
+
+	// the first loop to assign Emergency missions first
 	while (!Emergency_Missions.isEmpty() && (!Emergency_Rovers.isEmpty() || !Mountainous_Rovers.isEmpty() || !Polar_Rovers.isEmpty()))
 	{
+		// priority for emergency rovers
 		if (!Emergency_Rovers.isEmpty())
 		{
 			Emergency_Missions.dequeue(M, pri);
@@ -296,13 +299,13 @@ void MarsStation::AssignToRover()
 			M->setAssignDay(CurrentStep);
 			Rover* x = NULL;
 			Emergency_Rovers.dequeue(x, sig);
-			x->SetNumberOfOrderServed();
+			x->SetNumberOfOrderServed(); // increment the missions before checkup of the current rover
 			M->setSpeed(x->GetSpeed());
 			x->setMission(M);
-			Rovers--;
-			WaitingM--;
-			InExecution++;
-			RoversInExecution.enqueue(x, -M->getLastDay());
+			Rovers--; // decrease the number of available rovers
+			WaitingM--; // decrease the number of waiting missions
+			InExecution++; // increase the mission in execution
+			RoversInExecution.enqueue(x, -M->getLastDay()); // Add this rover to the list of inExecution
 		}
 
 		else if (!Mountainous_Rovers.isEmpty())
@@ -344,8 +347,10 @@ void MarsStation::AssignToRover()
 		}
 	}
 
+	// Assign the Polar Missions
 	while (!Polar_Missions.isEmpty() && (!Polar_Rovers.isEmpty()))
 	{
+		// the priority for Polar Rovers onlyyyyyyy
 		if (!Polar_Rovers.isEmpty())
 		{
 			Polar_Missions.dequeue(M);
@@ -365,8 +370,11 @@ void MarsStation::AssignToRover()
 			RoversInExecution.enqueue(x, -M->getLastDay());
 		}
 	}
+
+	// Assign the mountainous Mission
 	while (!Mountainous_Missions.isEmpty() && (!Mountainous_Rovers.isEmpty() || !Emergency_Rovers.isEmpty()))
 	{
+		// Priority to Mountainous Rovers
 		if (!Mountainous_Rovers.isEmpty())
 		{
 			M = Mountainous_Missions.getEntry(1);
@@ -386,6 +394,7 @@ void MarsStation::AssignToRover()
 			RoversInExecution.enqueue(x, -M->getLastDay());
 		}
 
+		// Then to the Emergency Rovers
 		else if (!Emergency_Rovers.isEmpty())
 		{
 			M;
@@ -503,6 +512,8 @@ void MarsStation::endCheckUp()
 {
 	Rover* myRover;
 	float pri = 0;
+
+	// check if the rover ends its Checkup duration
 	while (RoversInCheckUp.peekFront(myRover, pri))
 	{
 		if (myRover->getDurationDay_ending() == CurrentStep)
@@ -535,6 +546,7 @@ void MarsStation::endCheckUp()
 
 bool MarsStation::startCheckUp(Rover* myRover)
 {
+	// check if the rover reches the maximum number of missions before checkup
 	if (myRover->GetNumberOfOrderServed() == myRover->GetMaxMissionBeforeCheckup())
 	{
 		myRover->SetNumberOfOrderServed(0);
@@ -552,6 +564,8 @@ void MarsStation::checkCompleted()
 	Rover* myRover = NULL;
 	float pri = 0;
 	M_TYPE mt;
+
+	// check if the current step is the completed day of the mission
 	while (RoversInExecution.peekFront(myRover, pri))
 	{
 		if (myRover->getMission()->getLastDay() == CurrentStep)
@@ -623,18 +637,18 @@ void MarsStation::Simulation()
 	}
 
 	if (UImode == 1)
-		while (userInterface.interActiveMode() && CompletedM != formulated - cancelled)
+		while (userInterface.interActiveMode() && !(CompletedM == formulated - cancelled && CheckupRovers == 0))
 			dayDetails();
 
 	else if (UImode == 3)
-		while (userInterface.StepByStep() && CompletedM != formulated - cancelled)
+		while (userInterface.StepByStep() && !(CompletedM == formulated - cancelled && CheckupRovers == 0))
 			dayDetails();
 
 
 	else
 	{
 		userInterface.SlientMode(0);
-		while (CompletedM != formulated - cancelled)
+		while (!(CompletedM == formulated - cancelled && CheckupRovers == 0))
 			dayDetails();
 	}
 

@@ -23,7 +23,7 @@ public:
 	double getPriority();
 	void set_state(M_STATUS m);
 	void set_type(M_TYPE m);
-	void setMissionDuration(double& targetLocation); 
+	void setMissionDuration(double targetLocation); 
 	double getMissionDuration();
 	void setSignificance(int s);
 	void Assign();
