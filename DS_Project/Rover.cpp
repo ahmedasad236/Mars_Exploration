@@ -2,7 +2,7 @@
 
 Rover::Rover()
 {
-	NumberOfOrderServed = 0;
+	NumberOfOrderServed = 0; 
 }
 Rover::Rover(int id, int sp, M_TYPE t, int checkDuration, int missBefCheck)
 {

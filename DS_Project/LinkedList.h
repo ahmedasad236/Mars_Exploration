@@ -39,11 +39,11 @@ public:
 	Node<T>* getNodeAt(int position) 
 	{
 		
-		if (position < 1 && position > itemCount) 
+		if (position < 1 || position > itemCount) 
 			return nullptr;
 
 		Node<T>* curPtr = Head;
-		for (int skip = 1; skip <position; skip++)
+		for (int skip = 1; skip < position; skip++)
 			curPtr = curPtr->getNext();
 
 		return curPtr;
@@ -51,7 +51,7 @@ public:
 
 	T getEntry(int position) 
 	{
-		if ((position< 1) && (position > itemCount))
+		if ((position < 1) || (position > itemCount))
 		{
 			return nullptr;
 		}
@@ -91,33 +91,7 @@ public:
 
 		return ableToInsert;
 
-		//if (pos == -1000)
-		//{
-		//	pos = itemCount;
-		//}
-		//else if(pos > itemCount || pos < 1)
-		//	return 0;
-
-		//Node<T>* newNode = new Node<T>(item);
-		//if (!newNode)
-		//	return 0;
-
-		//int i = 1;
-		//if (pos == i)
-		//{
-		//	newNode->setNext(Head);
-		//	Head = newNode;
-		//}
-
-		//else
-		//{
-		//	Node<T>* ptr = getNodeAt(pos -1);
-		//	newNode->setNext(ptr->getNext());
-		//	ptr->setNext(newNode);
-		//}
-		//
-		//itemCount++;
-		//return 1;
+		
 	}
 
 	bool remove(int pos)

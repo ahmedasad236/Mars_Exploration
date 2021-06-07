@@ -143,4 +143,6 @@ bool Queue<T>::peekFront(T& frntEntry) const
 template <typename T>
 Queue<T>::~Queue()
 {
+	T item;
+	while (dequeue(item));
 }

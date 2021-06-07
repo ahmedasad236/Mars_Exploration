@@ -17,9 +17,10 @@ class UI
 		return num;
 	}
 
+	string in_out_file_num; // The input/output file number 
+
 public:
 	UI();
-	//void GetInput(ifstream& InputFile);
 	void PrintWaiting(int day, int waiting, PriorityQueue<Missions*> &E, Queue<Missions*> &P, LinkedList<Missions*> &M);
 	void PrintInExecution(int inExecution, PriorityQueue<Rover*> &rovers);
 	void PrintAvailableRovers(int available, PriorityQueue<Rover*> &E, PriorityQueue<Rover*> &M, PriorityQueue<Rover*> &P);
@@ -29,5 +30,8 @@ public:
 	void SlientMode(int);
 	bool StepByStep();
 	bool interActiveMode();
+	void PrintFailer(M_TYPE type);
+	void EnterFileName();
+	string getOutInFileNum();
 
 };

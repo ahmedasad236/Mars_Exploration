@@ -6,5 +6,5 @@ class PEvent : public Event
 public:
 	PEvent(int ED, int ID);
 	virtual void Execute(MarsStation* Ms);
-
+	virtual ~PEvent();
 };

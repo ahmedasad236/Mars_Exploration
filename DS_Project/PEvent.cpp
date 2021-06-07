@@ -11,6 +11,12 @@ void PEvent::Execute(MarsStation* Ms)
 	Ms->DeleteFromMountList(MissionID, temp);
 	
 	if (temp)
-		Ms->AddToEmergencyList(temp, temp->getFactorOfImportance());
-	
+	{
+		temp->set_type(EMERGENCY);
+		Ms->AddToEmergencyList(temp, temp->getPriority());
+	}
+}
+
+PEvent::~PEvent()
+{
 }

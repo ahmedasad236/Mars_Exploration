@@ -10,8 +10,6 @@ int UI::ChooseMode()
 	int x;
 	int count = 0;
 
-	cout <<Color(4 , "****** Welcome To Our Mars Station :) *******\n");
-	
 	do {
 		if (count)
 			cout << Color(1,"Please, Choose a valid choice :)\n\n");
@@ -31,11 +29,11 @@ int UI::ChooseMode()
 void UI::SlientMode(int i)
 {
 	if (i == 0)
-	{
-		cout << Color(6, "Silent Mode\nSimulation Starts...\n");
-	}
+		cout << Color(6, "\n\n********************  Silent Mode Simulation Starts...  ***************************\n");
+	
+
 	else
-		cout << Color(6, "Simulation ends, Output file created");
+		cout << Color(6, "\n\n********************  Simulation ends, Output file created  *********************\n\n");
 }
 
 bool UI::StepByStep()
@@ -51,6 +49,34 @@ bool UI::interActiveMode()
 	cin.get();
 	return 1;
 }
+
+void UI::PrintFailer(M_TYPE type)
+{
+	if (type == POLAR)
+		cout << Color(6, "There is Polar Mission Cancelled as there are no polar rovers :(\n");
+
+	else 
+		cout << Color(6, "Unfortunately, there is no Rover to Execute Missions :(\n");
+}
+
+void UI::EnterFileName()
+{
+	cout << Color(4, "******************************************* Welcome To CMP Mars Station :) *******************************************\n\n");
+	cout << Color(2, "Enter the input file number: ");
+
+	
+	getline(cin, in_out_file_num);
+
+	in_out_file_num += ".txt";
+
+}
+
+string UI::getOutInFileNum()
+{
+	return in_out_file_num;
+}
+
+
 
 void UI::PrintWaiting(int day, int waiting, PriorityQueue<Missions*> &E, Queue<Missions*> &P, LinkedList<Missions*> &M)
 {
@@ -265,11 +291,12 @@ void UI::PrintCompleted(int comp, Queue<Missions*> &completed)
 	Queue<Missions*>TempE;
 	Queue<Missions*>TempM;
 	Queue<Missions*>TempP;
-
+	Queue<Missions*>sorted; // To keep the sequence of the completed missions
 	Missions* temp = NULL;
 
 	while (completed.dequeue(temp))
 	{
+		sorted.enqueue(temp);
 		if (temp->get_type() == EMERGENCY)
 			TempE.enqueue(temp);
 
@@ -280,29 +307,29 @@ void UI::PrintCompleted(int comp, Queue<Missions*> &completed)
 			TempM.enqueue(temp);
 	}
 	
+	// Print Emergency
 	cout << Color(2, "[");
 	while (TempE.dequeue(temp))
-	{
 		cout << Color(2, temp->getID()) << Color(2, " ");
-		completed.enqueue(temp);
-	}
-	cout << Color(2, "]");
+	
+	cout << Color(2, "] ");
 
+	// Print Polar
 	cout << Color(4, "(");
 	while (TempP.dequeue(temp))
-	{
 		cout << Color(4, temp->getID()) << Color(4, " ");
-		completed.enqueue(temp);
-	}
-	cout << Color(4, ")");
+	
+	cout << Color(4, ") ");
 
+	// Print Mountainous
 	cout << Color(6, "{");
 	while (TempM.dequeue(temp))
-	{
 		cout << Color(6, temp->getID()) << Color(6, " ");
-		completed.enqueue(temp);
-	}
+		
 	cout << Color(6, "}");
+
+	while (sorted.dequeue(temp))
+		completed.enqueue(temp);
 
 	cout << Color(3, "\n----------------------------------------------------------------------------------\n");
 

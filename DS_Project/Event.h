@@ -13,5 +13,5 @@ public:
 	void setEventDay(int);
 	int getEventDay() const;
 	virtual void Execute(MarsStation* Ms) = 0;
-
+	virtual ~Event();
 };

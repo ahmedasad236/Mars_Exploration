@@ -10,40 +10,36 @@ class Missions
 	bool Assigned;
 	int ID;
 	M_STATUS State;
-	int StartDay;
-	int FD;
+	int StartDay; // Start of Execution
+	int FD; // formulation Day
 	double SpeedAssignedRover;
 public:
 	Missions();
-	Missions(M_TYPE type, int Id, double Target, int DTF);
 	Missions(M_TYPE type, int Id, double Target, int DTF,int fd);
 	void setTargetLocation(double& targetLocation);
 	int getID();
 	void setID(int id);
 	double getTargetLocation();
-	void ToEmergency();
 	double getPriority();
 	void set_state(M_STATUS m);
 	void set_type(M_TYPE m);
-	void setMissionDuration(double& targetLocation);
+	void setMissionDuration(double& targetLocation); 
 	double getMissionDuration();
 	void setSignificance(int s);
-	double getFactorOfImportance();
 	void Assign();
-	void InExecution();
-	void Completed();
 	void setSpeed(double);
 	double getSpeed();
-	int getWD();
-	int getED();
-	void setAssignDay(int);
+	int getWD(); // Get waiting Day
+	int getED(); // Get the Execution duration of the mission
+	void setAssignDay(int); // set the day of assignment
 	int getAssignDay();
 
-	void setFD(int fd);
+	void setFD(int fd); // set the formulation Day
 	int getFD();
 	
 	M_STATUS getState();
 	M_TYPE get_type();
-	int getLastDay();
+	int getLastDay(); // get the completion day
+	~Missions();
 };
 

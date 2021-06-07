@@ -13,3 +13,7 @@ int Event::getEventDay() const
 {
 	return ED;
 }
+
+Event::~Event()
+{
+}

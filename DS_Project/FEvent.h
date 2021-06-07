@@ -13,6 +13,6 @@ public:
 	FEvent(M_TYPE t, int ED, int ID, int location, int days, float sig);
 
 	virtual void Execute(MarsStation* Ms);
-
+	virtual ~FEvent();
 
 };

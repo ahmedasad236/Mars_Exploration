@@ -32,13 +32,15 @@ double Missions::getTargetLocation()
 {
 	return TargetLocation;
 }
-void Missions::ToEmergency()
-{
-	Type = EMERGENCY;
-}
+
 double Missions::getPriority()
 {
-	return getFactorOfImportance();
+	double factor = 0.0;
+
+	//operations to calc the factor
+	factor = 1000 * Significance - 100 * FD - 0.1 * TargetLocation - MissionDuration;
+	
+	return factor;
 }
 void Missions::set_state(M_STATUS m)
 {
@@ -60,30 +62,10 @@ void Missions::setSignificance(int s)
 {
 	Significance = s;
 }
-double Missions::getFactorOfImportance()
-{
-	double factor = 0.0;
-	/////////////////////////////
-	//operations to calc the factor
-	factor = 1000 * Significance - 100 * FD - 0.1 * TargetLocation; 
-	/////////////////////////////
-	// 5000 - 200 - 5 = 4795;
-	// 4796
-	// 8795
-	return factor;
-}
+
 void Missions::Assign()
 {
 	Assigned = true;
-}
-
-void Missions::InExecution()
-{
-	State = IN_EXCUTION;
-}
-void Missions::Completed()
-{
-	State = COMPLETED;
 }
 
 void Missions::setSpeed(double s)
@@ -130,4 +112,8 @@ M_TYPE Missions::get_type()
 int Missions::getLastDay()
 {
 	return StartDay + ceil(( (TargetLocation / SpeedAssignedRover) * 2) / 25) + (MissionDuration);
+}
+
+Missions::~Missions()
+{
 }

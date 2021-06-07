@@ -24,9 +24,13 @@ void FEvent::Execute(MarsStation* Ms)
 
 		break;
 	case(EMERGENCY):
-		Ms->AddToEmergencyList(A, A->getFactorOfImportance());
+		Ms->AddToEmergencyList(A, A->getPriority());
 		break;
 	default:
 		break;
 	}
+}
+
+FEvent::~FEvent()
+{
 }

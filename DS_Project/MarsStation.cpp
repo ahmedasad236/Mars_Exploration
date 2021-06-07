@@ -2,6 +2,8 @@
 #include <fstream>
 MarsStation::MarsStation()
 {
+	Mmissions = 0;
+	Exit = 0;
 	CurrentStep = 1;
 	countAutoPromotion = 0;
 	WaitingM = 0;
@@ -43,6 +45,7 @@ void MarsStation::AutoPromote()
 {
 	Missions* Temp;
 	int counter = 1;
+
 	while (!Mountainous_Missions.isEmpty() && counter <= Mountainous_Missions.getLength()) 
 	{
 		Temp = Mountainous_Missions.getEntry(counter);
@@ -55,7 +58,7 @@ void MarsStation::AutoPromote()
 				Temp->set_type(EMERGENCY);
 				Missions* dummy = NULL;
 				DeleteFromMountList(Temp->getID(), dummy);
-				AddToEmergencyList(dummy, dummy->getFactorOfImportance());
+				AddToEmergencyList(dummy, dummy->getPriority());
 				counter--;
 			}
 		}
@@ -76,14 +79,23 @@ void MarsStation::incrementCancelled()
 
 void MarsStation::GetInput()
 {
-	
+
 	ifstream InputFile;
-	InputFile.open("input.txt");
+	do
+	{
+		string name = "Input_TestCases/input";
+		userInterface.EnterFileName();
+		name += userInterface.getOutInFileNum(); // Set the name of the input file related to the input file
+		InputFile.open(name);
+	}while(!InputFile.is_open());
+
 	InputFile >> no_mountainousR >> no_polarR >> no_EmerR;
 
 	//getting the total number 
 	int no_ofRovers = no_EmerR + no_mountainousR + no_polarR;
 	Rovers = no_ofRovers;
+	
+	// If there is not any Rover, Exit the Program
 	
 
 	int* Mspeed = new int[no_mountainousR];		//Speeds of Mountainous Rovers
@@ -105,11 +117,12 @@ void MarsStation::GetInput()
 
 	//Reading Checkup Duration
 	InputFile >> M_CK >> P_CK >> E_CK;
+
 	//AutoP
 	InputFile >> AutoP;
-	//array of sequenced IDs
 
-	int id = 0;
+	
+	int id = 0; // set Rovers' IDs
 
 	for (int i = 0; i < no_mountainousR; i++) {
 		Rover* M_ROVER = new Rover(++id, Mspeed[i], MOUNTAINOUS, M_CK, Max_Mission_before_checkup);
@@ -129,32 +142,53 @@ void MarsStation::GetInput()
 	InputFile >> no_events;
 	char Event_Type;
 	char typeOFmission;
-	int ED;
-	int M_ID;
-	int TLOC;
-	int MDUR;
-	int SIG;
+	int ED; // Execution Duration 
+	int M_ID; // Mission ID
+	int TLOC; // Target Location
+	int MDUR;  // Mission Duration
+	int SIG;   // Mission Significance
+
 	for (int i = 0; i < no_events; i++) {
 		InputFile >> Event_Type;
 		Event* E;
 		if (Event_Type == 'F') {
-			formulated++;
+			
 			InputFile >> typeOFmission;
 			InputFile >> ED;
 			InputFile >> M_ID;
 			InputFile >> TLOC;
 			InputFile >> MDUR;
 			InputFile >> SIG;
-			if (typeOFmission == 'M') {
-				//FEvent(M_TYPE t, int ED, int ID, int location, int days, int sig);
 
-				E = new FEvent(MOUNTAINOUS, ED, M_ID, TLOC, MDUR, SIG);
+			// if any Rover is available. Note: Mountainous Mission can be promoted to Emergency
+			if (typeOFmission == 'M' ) {
+
+					E = new FEvent(MOUNTAINOUS, ED, M_ID, TLOC, MDUR, SIG);
+					formulated++;
+					EventList.enqueue(E);
+				
 			}
-			else if (typeOFmission == 'P') {
-				E = new FEvent(POLAR, ED, M_ID, TLOC, MDUR, SIG);
+
+			// Create a polar Event if there are polar rovers
+			else if (typeOFmission == 'P' ) {
+
+				if (!no_polarR)
+					userInterface.PrintFailer(POLAR);
+
+				else
+				{
+					E = new FEvent(POLAR, ED, M_ID, TLOC, MDUR, SIG);
+					formulated++;
+					EventList.enqueue(E);
+				}
 			}
+
+
+			// Create an Emergency Mission if any rover is available 
 			else if (typeOFmission == 'E') {
 				E = new FEvent(EMERGENCY, ED, M_ID, TLOC, MDUR, SIG);
+				formulated++;
+				EventList.enqueue(E);
 			}
 		}
 
@@ -162,13 +196,17 @@ void MarsStation::GetInput()
 			InputFile >> ED;
 			InputFile >> M_ID;
 			E = new CEvent(ED, M_ID);
+			EventList.enqueue(E);
 		}
+
 		else if (Event_Type == 'P') {
 			InputFile >> ED;
 			InputFile >> M_ID;
 			E = new PEvent(ED, M_ID);
+			EventList.enqueue(E);
 		}
-		EventList.enqueue(E);
+
+		
 	}
 
 	// Deallocate the arrays
@@ -178,6 +216,11 @@ void MarsStation::GetInput()
 	Mspeed = nullptr;
 	Pspeed = nullptr;
 	Espeed = nullptr;
+
+	// Terminate the program if there is not any rover
+	if (!no_ofRovers)
+		Exit = 1;
+	
 }
 
 bool MarsStation::DeleteFromMountList(int id, Missions* &m)
@@ -197,9 +240,8 @@ bool MarsStation::DeleteFromMountList(int id, Missions* &m)
 		}
 
 		else 
-		{
 			break;
-		}
+		
 
 		i++;
 	}
@@ -223,13 +265,22 @@ void MarsStation::AddToEmergencyList(Missions* mis, float priority)
 
 void MarsStation::AddToPolarList(Missions* pM)
 {
-	WaitingM++;
-	Polar_Missions.enqueue(pM);
+	 
+	if (no_polarR > 0)
+	{
+		WaitingM++;
+		Polar_Missions.enqueue(pM);
+	}
+
+	else
+		formulated--;
+
 }
 
 void MarsStation::AddToMountList(Missions* mM)
 {
 	WaitingM++;
+	Mmissions++;
 	Mountainous_Missions.Add(mM);
 }
 
@@ -265,7 +316,7 @@ void MarsStation::AssignToRover()
 			M->Assign();
 			M->set_state(IN_EXCUTION);
 			M->setAssignDay(CurrentStep);
-			float pri = M->getFactorOfImportance();
+			float pri = M->getPriority();
 			Rover* x = NULL;
 			float f;
 			Mountainous_Rovers.dequeue(x, f);
@@ -284,7 +335,7 @@ void MarsStation::AssignToRover()
 			M->Assign();
 			M->set_state(IN_EXCUTION);
 			M->setAssignDay(CurrentStep);
-			pri = M->getFactorOfImportance();
+			pri = M->getPriority();
 			x = NULL;
 			float f;
 			Polar_Rovers.dequeue(x,f);
@@ -306,7 +357,7 @@ void MarsStation::AssignToRover()
 			M->Assign();
 			M->set_state(IN_EXCUTION);
 			M->setAssignDay(CurrentStep);
-			pri = M->getFactorOfImportance();
+			pri = M->getPriority();
 			x = NULL;
 			float f;
 			Polar_Rovers.dequeue(x, f);
@@ -367,7 +418,7 @@ void MarsStation::ExecuteEvent()
 {
 	Event* event = NULL;
 	bool test =  EventList.peekFront(event);
-
+	
 	while (test && CurrentStep == event->getEventDay())
 	{
 
@@ -400,9 +451,12 @@ void MarsStation::ExecuteEvent()
 void MarsStation::outputFile()
 {
 	ofstream outputFile;
-	outputFile.open("Output_File.txt");
+	string outName = "Output_TestCases/Output";
+	outName += userInterface.getOutInFileNum(); // Set the name of the output file related to the input file
+	outputFile.open(outName);
 	outputFile.clear();
 	outputFile << "CD " << "ID " << "WD " << "ED" << endl;
+
 	////body
 	Missions* m;
 	int count = 0;
@@ -414,17 +468,14 @@ void MarsStation::outputFile()
 		count++;
 
 		if (m->get_type() == MOUNTAINOUS)
-		{
 			countM++;
-		}
+		
 		else if (m->get_type() == POLAR)
-		{
 			countP++;
-		}
+		
 		else if (m->get_type() == EMERGENCY)
-		{
 			countE++;
-		}
+		
 		AvgWait += m->getWD();
 		AvgExec += m->getED();
 		outputFile << m->getLastDay() << " " << m->getID() << " " << m->getFD() << " " << m->getWD() << " " << m->getED() << endl;
@@ -440,9 +491,13 @@ void MarsStation::outputFile()
 	outputFile << "Missions: " << count << " [M:" << countM << ", P:" << countP << ", E:" << countE << "]\n";
 	outputFile << "Rovers: " << (no_EmerR + no_mountainousR + no_polarR) << "[M:" << no_mountainousR << ", P:" << no_polarR << ", E:" << no_EmerR << "]\n";
 	outputFile << "Avg Wait = " << AvgWait << ", " << "AvgExec =" << AvgExec << endl;
-
-	outputFile << "Auto-promoted: " << (countM != 0 ?((double)countAutoPromotion / countM) * 100 : 0) << "%" << endl;
+	outputFile << "Auto-promoted: " << (Mmissions != 0 ? (double)countAutoPromotion / (Mmissions) * 100 : 0) << "%" << endl;
 	outputFile.close();
+}
+
+MarsStation::~MarsStation()
+{
+	
 }
 
 void MarsStation::endCheckUp()
@@ -488,6 +543,7 @@ bool MarsStation::startCheckUp(Rover* myRover)
 		RoversInCheckUp.enqueue(myRover, -myRover->getDurationDay_ending());  // minus here because we wanting the smaller ending day (day come first)
 		return true;														  // to be at the top of the queue (1 feb is earlier than 4 feb but smaller
 	}
+
 	else return false;
 }
 
@@ -540,8 +596,8 @@ void MarsStation::checkCompleted()
 void MarsStation::dayDetails()
 {
 	ExecuteEvent();
-	AssignToRover();
 	AutoPromote();
+	AssignToRover();
 	checkCompleted();
 	endCheckUp();
 	if(UImode != 2)
@@ -560,16 +616,21 @@ void MarsStation::Simulation()
 	GetInput();
 	UImode = userInterface.ChooseMode();
 	
+	if (Exit)
+	{
+		userInterface.PrintFailer(MOUNTAINOUS);
+		outputFile();
+		return;
+	}
+
 	if (UImode == 1)
-
-
-
 		while (userInterface.interActiveMode() && CompletedM != formulated - cancelled)
 			dayDetails();
 
 	else if (UImode == 3)
 		while (userInterface.StepByStep() && CompletedM != formulated - cancelled)
 			dayDetails();
+
 
 	else
 	{

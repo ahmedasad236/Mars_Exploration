@@ -1,0 +1,5 @@
+CD ID WD ED
+Missions: 0 [M:0, P:0, E:0]
+Rovers: 0[M:0, P:0, E:0]
+Avg Wait = 0, AvgExec =0
+Auto-promoted: 0%

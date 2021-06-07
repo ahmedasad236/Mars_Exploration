@@ -20,7 +20,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////////
 
 /*
-Function: Queue()
+Function: PriorityQueue()
 The constructor of the Queue class.
 
 */
@@ -171,4 +171,7 @@ bool PriorityQueue<T>::peekFront(T& frntEntry, float prio) const
 template <typename T>
 PriorityQueue<T>::~PriorityQueue()
 {
+	T item;
+	float p;
+	while (dequeue(item, p));
 }

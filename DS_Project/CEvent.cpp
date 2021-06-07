@@ -12,3 +12,7 @@ void CEvent::Execute(MarsStation* Ms)
 		Ms->incrementCancelled();
 
 }
+
+CEvent::~CEvent()
+{
+}
