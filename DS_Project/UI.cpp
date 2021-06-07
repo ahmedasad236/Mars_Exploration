@@ -53,7 +53,7 @@ bool UI::interActiveMode()
 void UI::PrintFailer(M_TYPE type)
 {
 	if (type == POLAR)
-		cout << Color(4, "There is Polar Mission Cancelled as there are no polar rovers :(\n");
+		cout << Color(4, "There is a Polar Mission Cancelled as there are no polar rovers :(\n");
 
 	else 
 		cout << Color(4, "Unfortunately, there is no Rover to Execute Missions :(\n");

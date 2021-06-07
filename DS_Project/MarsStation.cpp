@@ -597,8 +597,8 @@ void MarsStation::dayDetails()
 	ExecuteEvent();
 	AutoPromote();
 	endCheckUp();
-	AssignToRover();
 	checkCompleted();
+	AssignToRover();
 	if(UImode != 2)
 		printDay();
 	CurrentStep++;

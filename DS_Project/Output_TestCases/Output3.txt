@@ -1,10 +1,10 @@
 CD ID WD ED
 6 4 2 0 4
-12 1 2 5 5
-22 2 2 11 9
-62 3 2 29 31
+11 1 2 4 5
+20 2 2 9 9
+60 3 2 27 31
 75 5 2 0 73
 Missions: 5 [M:0, P:0, E:5]
 Rovers: 2[M:1, P:1, E:0]
-Avg Wait = 9, AvgExec =24.4
+Avg Wait = 8, AvgExec =24.4
 Auto-promoted: 0%
